@@ -1,6 +1,6 @@
 import React, {useReducer} from 'react';
 import reducer, {initialState} from './reducers/index'
-import { applyNumber, changeOperation} from './actions/index'
+import { applyNumber, changeOperation, clearDisplay} from './actions/index'
 
 import './App.css';
 
@@ -22,6 +22,10 @@ function App() {
     dispatch(changeOperation(operator))
   }
 
+  const handleClear =() =>{
+    dispatch(clearDisplay())
+  }
+
 
   return (
     <div className="App">
@@ -35,8 +39,8 @@ function App() {
             
             <TotalDisplay value={state.total}/>
             <div className="row details">
-              <span id="operation"><b>Operation:</b> state.operation</span>
-              <span id="memory"><b>Memory:</b> state.memory</span>
+              <span id="operation"><b>Operation:</b> {state.operation}</span>
+              <span id="memory"><b>Memory:</b> {state.memory}</span>
             </div>
             
             <div className="row">
@@ -70,7 +74,7 @@ function App() {
             </div>
 
             <div className="row ce_button">
-              <CalcButton value={"CE"}/>
+              <CalcButton value={"CE"} onClick={handleClear}/>
             </div>
 
           </form>
